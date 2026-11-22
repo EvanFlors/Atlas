@@ -1,0 +1,13 @@
+.base {
+  color: var(--color-accent);
+  text-decoration: none;
+  border-radius: var(--radius-sm);
+  transition: color 120ms ease;
+}
+
+.base:hover,
+.base:focus-visible {
+  color: var(--color-accent-hover);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
