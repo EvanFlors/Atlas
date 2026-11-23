@@ -6,6 +6,7 @@ import { router } from './router.tsx'
 import './styles/tokens.css'
 import './styles/fonts.css'
 import './styles/base.css'
+import 'highlight.js/styles/github-dark.css'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

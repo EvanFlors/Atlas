@@ -1,9 +1,11 @@
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
+import rehypeHighlight from 'rehype-highlight'
 import { Link } from '../ui/Link/Link'
 import { List } from '../ui/List/List'
 import { Code } from '../ui/Code/Code'
 import { Card } from '../ui/Card/Card'
+import { MermaidBlock } from './MermaidBlock'
 import { isInternalContentLink } from '../../lib/md/isInternalLink'
 import { translateContentHref } from '../../lib/md/translateLinks'
 import styles from './Markdown.module.css'
@@ -22,6 +24,7 @@ export function Markdown({ source, currentCategoriaFolder }: Props) {
     <div className={styles.root}>
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
+        rehypePlugins={[[rehypeHighlight, { detect: true, ignoreMissing: true }]]}
         components={{
           a({ href, children, ...rest }) {
             if (href && isInternalContentLink(href)) {
@@ -52,11 +55,7 @@ export function Markdown({ source, currentCategoriaFolder }: Props) {
             const inner = codeEl?.props?.children ?? children
             const lang = /language-(\w+)/.exec(codeClassName)?.[1]
             if (lang === 'mermaid') {
-              return (
-                <Code block className={styles.mermaidPending}>
-                  {inner}
-                </Code>
-              )
+              return <MermaidBlock source={String(inner).trim()} />
             }
             return <Code block>{inner}</Code>
           },

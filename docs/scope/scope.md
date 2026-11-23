@@ -26,7 +26,7 @@ El proyecto React vivirá en una carpeta hermana (sugerencia `app/` o similar, s
 | 4 | Shell de la app (layout, sidebar, routing) | Slice 1 Tracer | done |
 | 5 | Catálogo desde contenidos | Slice 1 Tracer | done |
 | 6 | Página de módulo con Markdown básico | Slice 1 Tracer | done |
-| 7 | Markdown enriquecido (GFM, código resaltado, Mermaid) | Slice 2 Render | planned |
+| 7 | Markdown enriquecido (GFM, código resaltado, Mermaid) | Slice 2 Render | done |
 | 8 | Navegación prev, next y breadcrumbs | Slice 3 Hallazgo | planned |
 | 9 | Búsqueda local | Slice 3 Hallazgo | planned |
 | 10 | Progreso y favoritos (localStorage) | Slice 4 Estado | planned |
@@ -89,11 +89,12 @@ Renderiza el `.md` del módulo activo con el mapeo definido en la feature 3. Mar
 
 ## Slice 2: Render completo
 
-### 7. Markdown enriquecido (GFM, código resaltado, Mermaid)
+### 7. Markdown enriquecido (GFM, código resaltado, Mermaid) · done
 Añadir tablas, listas de tareas, strikethrough (remark-gfm), resaltado de sintaxis para bloques de código (rehype-highlight o equivalente) y diagramas Mermaid. El sitio actual ya usa Mermaid por CDN; decide si lo mantienes así o lo empaquetas.
 **Done when:** un módulo con tabla, bloque de código y diagrama Mermaid se ve bien; sin conexión los bloques Mermaid muestran su texto como respaldo.
-- [ ] Build it: `/develop markdown enriquecido`
-- [ ] Verify it: `/check verify markdown enriquecido`
+- [x] Design it (spec): spec [0006](../specs/0006-markdown-enriquecido.md)
+- [x] Build it: `rehype-highlight` + `highlight.js` (tema `github-dark`), `<MermaidBlock>` con lazy import en `app/src/components/Markdown/MermaidBlock.tsx`. GFM ya vino con Feature 3.
+- [x] Verify it: build limpio, 67+ chunks, syntax highlight y Mermaid funcionan con fallback a código plano si offline o error
 
 ## Slice 3: Hallazgo
 

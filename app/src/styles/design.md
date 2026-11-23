@@ -123,6 +123,7 @@ El componente `<Markdown source={raw} />` (en `app/src/components/Markdown/`) pa
 - `code` inline → etiqueta nativa; `pre > code` → `<Code block>`.
 - `img` → `<span>` con imagen + leyenda del `alt` (loading lazy, fallback en error).
 - `table` → tabla nativa con wrapper scrollable y estilos de token.
-- Bloques `mermaid` → placeholder visible hasta Feature 7.
+- Bloques con lenguaje (` ```ts `, ` ```python `, etc.) → syntax highlighting via `rehype-highlight` (highlight.js, tema `github-dark`).
+- Bloques `mermaid` → `<MermaidBlock>` que hace lazy import del paquete `mermaid` y renderiza el SVG; si falla la carga o hay error de sintaxis, muestra el código fuente como fallback. Mermaid corre con `securityLevel: 'strict'`.
 
 Para ver cualquier módulo real: `/_md/:categoria/:modulo` (solo dev). El catálogo tipado vive en `app/src/lib/md/catalog.ts` (`import { CATALOG } from '...'`), con las 4 categorías y 66 módulos listos para alimentar al sidebar en Feature 4.
