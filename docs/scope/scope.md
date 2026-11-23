@@ -32,6 +32,16 @@ El proyecto React vivirá en una carpeta hermana (sugerencia `app/` o similar, s
 | 10 | Progreso y favoritos (localStorage) | Slice 4 Estado | planned |
 | 11 | Responsive, accesibilidad y Lighthouse | Slice 5 Entrega | planned |
 | 12 | Deploy estático | Slice 5 Entrega | planned |
+| 0 | Catálogo pre-computado en build (deuda técnica) | Deuda técnica | planned |
+
+## Deuda técnica
+
+### 0. Catálogo pre-computado en build · planned
+Quitar el eager de `catalog.ts` y sustituirlo por un plugin Vite que emite `catalog.json`. Elimina los warnings `INEFFECTIVE_DYNAMIC_IMPORT` y baja el bundle inicial de ~615KB gzip a ~100KB. No cambia la API pública del `CATALOG`.
+**Done when:** `npm run build` produce ≥66 chunks pequeños, cero warnings, y el sidebar sigue funcionando igual.
+- [x] Design it (spec): spec [0005](../specs/0005-catalogo-build-time.md)
+- [ ] Build it: `/develop catalogo build time`
+- [ ] Verify it: `/check verify catalogo build time`
 
 ## Fundación
 
