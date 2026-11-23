@@ -17,7 +17,6 @@ export function Breadcrumbs() {
         gap: 'var(--space-2)',
         fontSize: 'var(--text-sm)',
         color: 'var(--color-text-muted)',
-        marginBottom: 'var(--space-4)',
       }}
     >
       <Link to="/" style={{ color: 'inherit' }}>Home</Link>
