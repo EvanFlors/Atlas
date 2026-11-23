@@ -1,24 +1,80 @@
+/*
+  Markdown content: estándares de tipografía para lectura larga.
+  Body 17px / line-height 1.65, measure 72ch, headings con aire arriba.
+  Referencias: practicaltypography.com, Nielsen Norman Group.
+*/
 .root {
   max-width: 72ch;
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
+  gap: var(--space-5);
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--color-text);
+}
+
+.root ::selection {
+  background: var(--color-accent);
+  color: var(--color-accent-fg);
 }
 
 .root h1,
 .root h2,
 .root h3,
 .root h4 {
-  line-height: var(--leading-tight);
-  margin-top: var(--space-5);
+  line-height: 1.25;
+  margin-top: var(--space-6);
+  margin-bottom: 0;
+  font-weight: 700;
+  letter-spacing: -0.015em;
 }
-.root h1 { font-size: var(--text-3xl); }
-.root h2 { font-size: var(--text-2xl); }
-.root h3 { font-size: var(--text-xl); }
-.root h4 { font-size: var(--text-lg); color: var(--color-text-muted); }
+.root h1 {
+  font-size: 36px;
+  margin-top: var(--space-3);
+}
+.root h2 {
+  font-size: 28px;
+}
+.root h3 {
+  font-size: 22px;
+  letter-spacing: -0.01em;
+}
+.root h4 {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  letter-spacing: 0;
+}
 
 .root p {
-  line-height: var(--leading-normal);
+  margin: 0;
+}
+
+.root strong {
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.root em {
+  font-style: italic;
+}
+
+.root a {
+  color: var(--color-accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+.root a:hover {
+  text-decoration-thickness: 2px;
+  color: var(--color-accent-hover);
+}
+
+.root hr {
+  border: 0;
+  height: 1px;
+  background: var(--color-border);
+  margin: var(--space-6) 0;
 }
 
 .tableWrap {
@@ -31,10 +87,11 @@
   border-collapse: collapse;
   width: 100%;
   font-size: var(--text-sm);
+  line-height: 1.5;
 }
 .table th,
 .table td {
-  padding: var(--space-2) var(--space-3);
+  padding: var(--space-3) var(--space-4);
   border-bottom: 1px solid var(--color-border);
   text-align: left;
   vertical-align: top;
@@ -42,6 +99,10 @@
 .table th {
   background: var(--color-bg-elevated);
   font-weight: 600;
+  color: var(--color-text);
+}
+.table tbody tr:hover td {
+  background: var(--color-bg-elevated);
 }
 .table tr:last-child td {
   border-bottom: none;
@@ -50,14 +111,18 @@
 .quote {
   border-left: 3px solid var(--color-accent);
   background: var(--color-bg-elevated);
+  padding: var(--space-4) var(--space-5);
+  color: var(--color-text);
 }
+.quote > :first-child { margin-top: 0; }
+.quote > :last-child { margin-bottom: 0; }
 
 .figure {
   display: flex;
   flex-direction: column;
   gap: var(--space-2);
   align-items: flex-start;
-  margin: var(--space-2) 0;
+  margin: var(--space-3) 0;
 }
 .figure img {
   max-width: 100%;
@@ -69,6 +134,7 @@
   font-size: var(--text-sm);
   color: var(--color-text-muted);
   line-height: var(--leading-normal);
+  font-style: italic;
 }
 
 .mermaidPending::before {
@@ -88,7 +154,7 @@
   display: flex;
   align-items: center;
   gap: var(--space-3);
-  scroll-margin-top: 80px;
+  scroll-margin-top: 100px;
 }
 
 .sectionCheck {
