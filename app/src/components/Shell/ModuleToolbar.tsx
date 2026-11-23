@@ -2,6 +2,7 @@ import { useMemo } from 'react'
 import { FiList } from 'react-icons/fi'
 import { useProgress } from '../../lib/progress/store'
 import { sectionSlug } from '../../lib/progress/slug'
+import { Breadcrumbs } from './Breadcrumbs'
 import { FavoriteButton } from './FavoriteButton'
 import styles from './Shell.module.css'
 
@@ -27,41 +28,41 @@ export function ModuleToolbar({ moduloId, source }: Props) {
   const pct = total ? Math.round((done / total) * 100) : 0
 
   return (
-    <>
-      <div className={styles.progressBarWrap} aria-label={`Progreso: ${pct}%`}>
+    <div className={styles.moduleHeader}>
+      <div className={styles.moduleHeaderRow}>
+        <Breadcrumbs />
+        <div className={styles.moduleActionsInline}>
+          {total > 0 && (
+            <details className={styles.tocDetails}>
+              <summary className={styles.tocSummary}>
+                <FiList /> Secciones
+              </summary>
+              <ul className={styles.tocList}>
+                {headings.map((h) => (
+                  <li key={h.key}>
+                    <a
+                      href={`#${h.key}`}
+                      onClick={(e) => {
+                        e.preventDefault()
+                        const el = document.getElementById(h.key)
+                        el?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                        const details = e.currentTarget.closest('details')
+                        if (details) details.removeAttribute('open')
+                      }}
+                    >
+                      {h.title}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </details>
+          )}
+          <FavoriteButton moduloId={moduloId} />
+        </div>
+      </div>
+      <div className={styles.progressBarTrack} aria-label={`Progreso: ${pct}%`}>
         <div className={styles.progressBarFill} style={{ width: `${pct}%` }} />
-        <span className={styles.progressLabel}>
-          {done}/{total} · {pct}%
-        </span>
       </div>
-      <div className={styles.moduleActions}>
-        {total > 0 && (
-          <details className={styles.tocDetails}>
-            <summary className={styles.tocSummary}>
-              <FiList /> Secciones
-            </summary>
-            <ul className={styles.tocList}>
-              {headings.map((h) => (
-                <li key={h.key}>
-                  <a
-                    href={`#${h.key}`}
-                    onClick={(e) => {
-                      e.preventDefault()
-                      const el = document.getElementById(h.key)
-                      el?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-                      const details = e.currentTarget.closest('details')
-                      if (details) details.removeAttribute('open')
-                    }}
-                  >
-                    {h.title}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </details>
-        )}
-        <FavoriteButton moduloId={moduloId} />
-      </div>
-    </>
+    </div>
   )
 }

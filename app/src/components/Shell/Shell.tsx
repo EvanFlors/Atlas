@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 import { Outlet, useLocation } from 'react-router-dom'
 import { Header } from './Header'
 import { Sidebar } from './Sidebar'
-import { Breadcrumbs } from './Breadcrumbs'
 import styles from './Shell.module.css'
 
 export function Shell() {
@@ -29,7 +28,6 @@ export function Shell() {
         <Sidebar />
       </aside>
       <main className={styles.main}>
-        <Breadcrumbs />
         <Outlet />
       </main>
       {drawerOpen && (
