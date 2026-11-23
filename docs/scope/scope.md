@@ -33,6 +33,7 @@ El proyecto React vivirá en una carpeta hermana (sugerencia `app/` o similar, s
 | 11 | Responsive, accesibilidad y Lighthouse | Slice 5 Entrega | done |
 | 12 | Deploy estático | Slice 5 Entrega | done |
 | 0 | Catálogo pre-computado en build (deuda técnica) | Deuda técnica | done |
+| 13 | UX polish (sidebar plegable, iconos, toolbar módulo, sticky top) | Post-MVP | done |
 
 ## Deuda técnica
 
@@ -136,6 +137,15 @@ Publicar la build en un alojamiento estático (GitHub Pages, Cloudflare Pages, N
 - [x] Design it (spec): spec [0011](../specs/0011-deploy-github-pages.md) · **GitHub Pages user page** (root, BrowserRouter + 404 trick)
 - [x] Build it: `.github/workflows/deploy.yml` + `app/public/404.html` + script restaurador en `app/index.html`
 - [x] Verify it (pendiente real): publica tras push a `main`; medir Lighthouse móvil contra la URL una vez desplegado
+
+## Post-MVP
+
+### 13. UX polish · done
+Mejoras de usabilidad tras el deploy: sidebar con categorías plegables, labels completos (no solo id), iconos con react-icons, toolbar por módulo con barra de progreso y navegación rápida entre secciones, topbar sticky al hacer scroll.
+**Done when:** categorías expandibles con chevron; sidebar muestra "H01 — …"; emojis reemplazados por iconos; módulo muestra progreso % y dropdown de secciones; header queda arriba al scrollear.
+- [x] Design it (spec): spec [0012](../specs/0012-ux-polish.md)
+- [x] Build it: react-icons instalado; Sidebar plegable con `useState<Set>`; `<ModuleToolbar>` con progreso % y dropdown `<details>` de secciones; `scroll-margin-top` en h2; header sticky con sombra
+- [x] Verify it: build limpio, tsc verde
 
 ## Deferred
 Fuera de alcance del build actual, se quedan aquí para que el plan no mienta.

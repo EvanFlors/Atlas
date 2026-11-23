@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { FiMenu, FiX } from 'react-icons/fi'
 import { Button } from '../ui/Button/Button'
 import { ThemeToggle } from '../ThemeToggle'
 import { ExportImport } from './ExportImport'
@@ -21,7 +22,7 @@ export function Header({ onToggleDrawer, drawerOpen }: Props) {
           aria-expanded={drawerOpen}
           className={styles.hamburger}
         >
-          ☰
+          {drawerOpen ? <FiX /> : <FiMenu />}
         </Button>
         <Link to="/" className={styles.brand}>
           ATLAS

@@ -1,3 +1,4 @@
+import { FaStar, FaRegStar } from 'react-icons/fa'
 import { Button } from '../ui/Button/Button'
 import { useProgress } from '../../lib/progress/store'
 
@@ -12,7 +13,7 @@ export function FavoriteButton({ moduloId }: { moduloId: string }) {
       aria-label={fav ? 'Quitar de favoritos' : 'Añadir a favoritos'}
       title={fav ? 'En favoritos' : 'Añadir a favoritos'}
     >
-      {fav ? '★ Favorito' : '☆ Favorito'}
+      {fav ? <FaStar /> : <FaRegStar />} Favorito
     </Button>
   )
 }

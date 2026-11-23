@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { useLocation, useParams } from 'react-router-dom'
 import { Markdown } from '../components/Markdown/Markdown'
 import { PrevNext } from '../components/Shell/PrevNext'
-import { FavoriteButton } from '../components/Shell/FavoriteButton'
+import { ModuleToolbar } from '../components/Shell/ModuleToolbar'
 import { loadModule, ModuleNotFound } from '../lib/md/loader'
 import { CATALOG } from '../lib/md/catalog'
 import { useProgress } from '../lib/progress/store'
@@ -38,15 +38,7 @@ export default function ModuloView() {
   if (error) return <p style={{ color: 'crimson' }}>{error}</p>
   return (
     <>
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'flex-end',
-          marginBottom: 'var(--space-3)',
-        }}
-      >
-        <FavoriteButton moduloId={mod.id} />
-      </div>
+      <ModuleToolbar moduloId={mod.id} source={source} />
       <Markdown source={source} currentCategoriaFolder={cat.folder} moduloId={mod.id} />
       <PrevNext categoriaId={cat.id} moduloId={mod.id} />
     </>

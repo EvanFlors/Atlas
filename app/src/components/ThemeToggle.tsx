@@ -1,11 +1,18 @@
+import type { ReactElement } from 'react'
+import { FiSun, FiMoon, FiMonitor } from 'react-icons/fi'
 import { useTheme, type Theme } from '../hooks/useTheme'
 import { Button } from './ui/Button/Button'
 
+const ICON: Record<Theme, ReactElement> = {
+  light: <FiSun />,
+  dark: <FiMoon />,
+  system: <FiMonitor />,
+}
 
 const LABEL: Record<Theme, string> = {
-  light: '☀️ Light',
-  dark: '🌙 Dark',
-  system: '🖥 System',
+  light: 'Light',
+  dark: 'Dark',
+  system: 'System',
 }
 
 const NEXT: Record<Theme, Theme> = {
@@ -21,9 +28,10 @@ export function ThemeToggle() {
       variant="ghost"
       size="sm"
       onClick={() => setTheme(NEXT[theme])}
-      aria-label="Toggle theme"
+      aria-label={`Tema actual: ${theme}. Cambiar al siguiente.`}
+      title={`Tema: ${theme} (click para cambiar)`}
     >
-      {LABEL[theme]}
+      {ICON[theme]} {LABEL[theme]}
     </Button>
   )
 }

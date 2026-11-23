@@ -10,12 +10,16 @@
 
 .header {
   grid-area: header;
+  position: sticky;
+  top: 0;
+  z-index: 3;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 var(--space-5);
   border-bottom: 1px solid var(--color-border);
   background: var(--color-bg-elevated);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .brand {
@@ -42,7 +46,7 @@
 .nav {
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
+  gap: var(--space-3);
 }
 
 .searchInput {
@@ -68,16 +72,37 @@
   gap: var(--space-1);
 }
 
-.catLink {
+.catToggle {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-1) var(--space-2);
   font-weight: 600;
   color: var(--color-text);
-  text-decoration: none;
-  padding: var(--space-1) var(--space-2);
+  background: transparent;
+  border: none;
   border-radius: var(--radius-sm);
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
 }
 
-.catLink:hover {
+.catToggle:hover {
   background: var(--color-bg);
+}
+
+.catToggle svg {
+  flex-shrink: 0;
+}
+
+.catLabel {
+  flex: 1;
+}
+
+.catCount {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  font-weight: 400;
 }
 
 .modList {
@@ -97,6 +122,9 @@
   text-decoration: none;
   border-radius: var(--radius-sm);
   border-left: 3px solid transparent;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .modLink:hover {
@@ -120,6 +148,104 @@
   inset: 60px 0 0 0;
   background: rgba(0, 0, 0, 0.5);
   z-index: 1;
+}
+
+.toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) 0;
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-border);
+  margin-bottom: var(--space-4);
+}
+
+.progressWrap {
+  position: relative;
+  flex: 1;
+  height: 8px;
+  background: var(--color-bg-elevated);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.progressBar {
+  height: 100%;
+  background: var(--color-accent);
+  transition: width 200ms ease;
+}
+
+.progressLabel {
+  position: absolute;
+  right: 4px;
+  top: -18px;
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+}
+
+.tocDetails {
+  position: relative;
+}
+
+.tocSummary {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-1) var(--space-3);
+  font-size: var(--text-sm);
+  color: var(--color-text);
+  background: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  list-style: none;
+}
+
+.tocSummary::-webkit-details-marker {
+  display: none;
+}
+
+.tocSummary::marker {
+  display: none;
+  content: '';
+}
+
+.tocList {
+  position: absolute;
+  top: calc(100% + var(--space-1));
+  right: 0;
+  min-width: 280px;
+  max-width: 420px;
+  max-height: 60vh;
+  overflow-y: auto;
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  padding: var(--space-2);
+  list-style: none;
+  margin: 0;
+  z-index: 3;
+}
+
+.tocList li + li {
+  margin-top: 2px;
+}
+
+.tocList a {
+  display: block;
+  padding: var(--space-1) var(--space-2);
+  color: var(--color-text);
+  text-decoration: none;
+  border-radius: var(--radius-sm);
+  font-size: var(--text-sm);
+}
+
+.tocList a:hover {
+  background: var(--color-bg);
 }
 
 @media (max-width: 767px) {

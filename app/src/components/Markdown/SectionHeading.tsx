@@ -12,7 +12,7 @@ export function SectionHeading({ moduloId, sectionKey, children }: Props) {
   const { isSection, toggleSection } = useProgress()
   const checked = isSection(moduloId, sectionKey)
   return (
-    <h2 className={styles.sectionHeading}>
+    <h2 id={sectionKey} className={styles.sectionHeading}>
       <label className={styles.sectionCheck}>
         <input
           type="checkbox"

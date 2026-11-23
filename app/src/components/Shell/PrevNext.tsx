@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { FiArrowLeft, FiArrowRight } from 'react-icons/fi'
 import { Button } from '../ui/Button/Button'
 import { getAdjacent } from '../../lib/md/adjacent'
 
@@ -22,14 +23,18 @@ export function PrevNext({ categoriaId, moduloId }: Props) {
       <div>
         {prev && (
           <Link to={`/${categoriaId}/${prev.id}`} style={{ textDecoration: 'none' }}>
-            <Button variant="ghost">← {prev.id} · {prev.label}</Button>
+            <Button variant="ghost">
+              <FiArrowLeft /> {prev.id} · {prev.label}
+            </Button>
           </Link>
         )}
       </div>
       <div>
         {next && (
           <Link to={`/${categoriaId}/${next.id}`} style={{ textDecoration: 'none' }}>
-            <Button variant="ghost">{next.id} · {next.label} →</Button>
+            <Button variant="ghost">
+              {next.id} · {next.label} <FiArrowRight />
+            </Button>
           </Link>
         )}
       </div>

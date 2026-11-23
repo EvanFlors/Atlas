@@ -1,4 +1,5 @@
 import { useRef } from 'react'
+import { FiDownload, FiUpload } from 'react-icons/fi'
 import { Button } from '../ui/Button/Button'
 import { useProgress } from '../../lib/progress/store'
 
@@ -30,10 +31,10 @@ export function ExportImport() {
   return (
     <>
       <Button variant="ghost" size="sm" onClick={onExport} aria-label="Exportar progreso">
-        ⬇ Exportar
+        <FiDownload /> Exportar
       </Button>
       <Button variant="ghost" size="sm" onClick={onPickFile} aria-label="Importar progreso">
-        ⬆ Importar
+        <FiUpload /> Importar
       </Button>
       <input
         ref={fileRef}
