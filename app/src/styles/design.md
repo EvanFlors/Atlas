@@ -133,3 +133,12 @@ Para ver cualquier módulo real: `/_md/:categoria/:modulo` (solo dev). El catál
 - **Breadcrumbs** (`app/src/components/Shell/Breadcrumbs.tsx`) al tope del `main`: calcula `Home / Categoria / Modulo` desde `useLocation` + `CATALOG`. En `/` no se muestra.
 - **Prev/Next** (`app/src/components/Shell/PrevNext.tsx`) al pie de cada módulo: usa `getAdjacent(categoriaId, moduloId)` de `app/src/lib/md/adjacent.ts`. Sin salto cross-category.
 - **Búsqueda local** en el sidebar: input tipo search filtra módulos por `label` (incluye id + título) y oculta categorías vacías. Estado local en `Sidebar`, sobrevive al cambio de ruta (el Sidebar vive en Shell).
+
+## Progreso y favoritos
+
+- Estado en `localStorage['atlas-academia-v1']`, shape compat con el sitio legacy: `{done, sections, bookmarks, last}`. Theme vive aparte en `atlas.theme`.
+- `ProgressProvider` en `main.tsx`, hook `useProgress()` en `app/src/lib/progress/store.tsx`.
+- Checkbox inline en cada `<h2>` dentro del Markdown (solo si `<Markdown moduloId=…>` se renderiza); section key = `sectionSlug(title) + '-' + indexH2` (port exacto del slug legacy en `app/src/lib/progress/slug.ts`).
+- Favorito por módulo: `<FavoriteButton>` en `ModuloView`, botón ghost con ☆/★.
+- Export/Import: dos botones en `Header` (vanilla DOM, descarga JSON y lee `<input type="file">`). Un export legacy se importa sin perder nada (campo `theme` se ignora).
+- `last` se actualiza al navegar a un módulo (compat legacy; sin uso propio todavía).

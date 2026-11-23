@@ -29,7 +29,7 @@ El proyecto React vivirá en una carpeta hermana (sugerencia `app/` o similar, s
 | 7 | Markdown enriquecido (GFM, código resaltado, Mermaid) | Slice 2 Render | done |
 | 8 | Navegación prev, next y breadcrumbs | Slice 3 Hallazgo | done |
 | 9 | Búsqueda local | Slice 3 Hallazgo | done |
-| 10 | Progreso y favoritos (localStorage) | Slice 4 Estado | planned |
+| 10 | Progreso y favoritos (localStorage) | Slice 4 Estado | done |
 | 11 | Responsive, accesibilidad y Lighthouse | Slice 5 Entrega | planned |
 | 12 | Deploy estático | Slice 5 Entrega | planned |
 | 0 | Catálogo pre-computado en build (deuda técnica) | Deuda técnica | done |
@@ -114,10 +114,12 @@ Campo de búsqueda que filtra módulos por título y, si el pipeline lo permite 
 
 ## Slice 4: Estado del usuario
 
-### 10. Progreso y favoritos (localStorage) · needs a decision
+### 10. Progreso y favoritos (localStorage) · done
 Marcar secciones como estudiadas, marcar módulos como favoritos, exportar e importar progreso. La decisión clave: definir el esquema en localStorage y si es compatible con el export del `index.html` actual (así quien ya usa el sitio no pierde progreso).
 **Done when:** el usuario marca una sección, recarga la página y sigue marcada; exportar genera un archivo que importar restaura el estado.
-- [ ] Design it (spec): `/architect progreso y favoritos`
+- [x] Design it (spec): spec [0009](../specs/0009-progreso-y-favoritos.md) · **compat total** con `atlas-academia-v1`
+- [x] Build it: `ProgressProvider` + `useProgress()`, `SectionHeading` con checkbox, `FavoriteButton`, `ExportImport` en Header. Port del slug legacy en `app/src/lib/progress/slug.ts`.
+- [x] Verify it: build limpio, exports legacy se importan sin perder progreso
 
 ## Slice 5: Entrega
 

@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { ThemeToggle } from '../ThemeToggle'
+import { ExportImport } from './ExportImport'
 import styles from './Shell.module.css'
 
 export function Header() {
@@ -8,7 +9,10 @@ export function Header() {
       <Link to="/" className={styles.brand}>
         ATLAS
       </Link>
-      <ThemeToggle />
+      <div style={{ display: 'flex', gap: 'var(--space-2)', alignItems: 'center' }}>
+        <ExportImport />
+        <ThemeToggle />
+      </div>
     </header>
   )
 }

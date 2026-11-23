@@ -6,19 +6,33 @@ import { List } from '../ui/List/List'
 import { Code } from '../ui/Code/Code'
 import { Card } from '../ui/Card/Card'
 import { MermaidBlock } from './MermaidBlock'
+import { SectionHeading } from './SectionHeading'
 import { isInternalContentLink } from '../../lib/md/isInternalLink'
 import { translateContentHref } from '../../lib/md/translateLinks'
+import { sectionSlug } from '../../lib/progress/slug'
 import styles from './Markdown.module.css'
 
 interface Props {
-    source: string | null | undefined
-    currentCategoriaFolder?: string
+  source: string | null | undefined
+  currentCategoriaFolder?: string
+  moduloId?: string
 }
 
-export function Markdown({ source, currentCategoriaFolder }: Props) {
-    if (!source) {
-        return <p className={styles.error}>Contenido no disponible.</p>
-    }
+// Extrae texto plano de un nodo hast (para calcular slug del título de h2).
+function nodeText(node: any): string {
+  if (!node) return ''
+  if (node.value) return node.value as string
+  if (node.children) return node.children.map(nodeText).join('')
+  return ''
+}
+
+export function Markdown({ source, currentCategoriaFolder, moduloId }: Props) {
+  if (!source) {
+    return <p className={styles.error}>Contenido no disponible.</p>
+  }
+
+  // Contador local que se reinicia en cada render; react-markdown recorre nodos en orden.
+  let h2Index = 0
 
   return (
     <div className={styles.root}>
@@ -43,13 +57,19 @@ export function Markdown({ source, currentCategoriaFolder }: Props) {
           ol(props) {
             return <List as="ol" variant="numbered">{props.children}</List>
           },
+          h2({ node, children }: any) {
+            if (!moduloId) return <h2>{children}</h2>
+            const key = `${sectionSlug(nodeText(node))}-${h2Index++}`
+            return (
+              <SectionHeading moduloId={moduloId} sectionKey={key}>
+                {children}
+              </SectionHeading>
+            )
+          },
           code({ className, children }) {
-            // Solo código INLINE llega aquí sin pasar por pre().
             return <code className={className}>{children}</code>
           },
           pre({ children }) {
-            // react-markdown emite <pre><code class="language-xxx">texto</code></pre>.
-            // Extraemos lang e inner del <code> interno.
             const codeEl = children as any
             const codeClassName: string = codeEl?.props?.className ?? ''
             const inner = codeEl?.props?.children ?? children
