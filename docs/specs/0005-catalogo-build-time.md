@@ -1,6 +1,6 @@
 # 0005 · Catálogo pre-computado en build time
 
-**Status**: Proposed
+**Status**: Accepted
 **Date**: 2026-11-22
 **Feature**: scope.md · Feature 0 (Deuda técnica)
 **Build approach**: Skateboard (una sola pieza que entrega el valor completo, sin fases)
@@ -14,7 +14,7 @@ Quitar el eager de `app/src/lib/md/catalog.ts` y sustituirlo por un `catalog.jso
 - **AC-1**: Un plugin de Vite en `app/scripts/catalog-plugin.ts` lee `contenidos/**/*.md` al arrancar (dev y build), parsea el primer h1 de cada archivo, y emite `app/src/generated/catalog.json` con la misma shape que hoy produce `catalog.ts`.
 - **AC-2**: `app/src/lib/md/catalog.ts` exporta `CATALOG` leyendo ese JSON vía `import catalog from '../../generated/catalog.json'`. Nada de `import.meta.glob` eager.
 - **AC-3**: El plugin regenera el JSON cuando cambia cualquier `.md` en `contenidos/` en modo dev (watcher). El cambio se refleja sin reiniciar el server.
-- **AC-4**: `app/src/generated/catalog.json` está en `.gitignore` (es derivado, no se versiona).
+- **AC-4**: `app/src/generated/catalog.json` **sí se versiona** (necesario porque `tsc -b` corre antes de `vite build` y necesita leer el JSON para tipar el import). El plugin lo regenera en cada `npm run build` y en dev watch; el commit es un snapshot reproducible.
 - **AC-5**: `npm run build` produce **≥66 chunks pequeños** en `dist/assets/` (uno por `.md`) en lugar de un solo bundle gigante. El bundle inicial de JS baja a <150KB gzip.
 - **AC-6**: Los warnings `INEFFECTIVE_DYNAMIC_IMPORT` desaparecen en `npm run build`.
 - **AC-7**: La shape del `CATALOG` no cambia: todo el código que ya lo consume (Sidebar, Home, CategoriaView, ModuloView, translateLinks) sigue funcionando sin tocar.

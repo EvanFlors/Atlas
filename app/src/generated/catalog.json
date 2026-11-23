@@ -1,0 +1,428 @@
+{
+  "categorias": [
+    {
+      "id": "excel",
+      "label": "Excel",
+      "folder": "Excel",
+      "modulos": [
+        {
+          "id": "H01",
+          "label": "H01 — Fundamentos de Excel y las hojas de cálculo",
+          "categoria": "excel",
+          "path": "Excel/H01.md"
+        },
+        {
+          "id": "H02",
+          "label": "H02 — Interfaz, navegación y administración de libros de Excel",
+          "categoria": "excel",
+          "path": "Excel/H02.md"
+        },
+        {
+          "id": "H03",
+          "label": "H03 — Introducción, edición y tipos de datos en Excel",
+          "categoria": "excel",
+          "path": "Excel/H03.md"
+        },
+        {
+          "id": "H04",
+          "label": "H04 — Formato, presentación e impresión en Microsoft Excel",
+          "categoria": "excel",
+          "path": "Excel/H04.md"
+        },
+        {
+          "id": "H05",
+          "label": "H05 — Fórmulas, operadores y referencias",
+          "categoria": "excel",
+          "path": "Excel/H05.md"
+        },
+        {
+          "id": "H06",
+          "label": "H06 — Tablas, rangos y gestión profesional de datos",
+          "categoria": "excel",
+          "path": "Excel/H06.md"
+        },
+        {
+          "id": "H07",
+          "label": "H07 — Funciones lógicas, condicionales y control de errores",
+          "categoria": "excel",
+          "path": "Excel/H07.md"
+        },
+        {
+          "id": "H08",
+          "label": "H08 — Funciones matemáticas y trigonométricas de Excel",
+          "categoria": "excel",
+          "path": "Excel/H08.md"
+        },
+        {
+          "id": "H09",
+          "label": "H09 — Funciones estadísticas y análisis cuantitativo",
+          "categoria": "excel",
+          "path": "Excel/H09.md"
+        },
+        {
+          "id": "H10",
+          "label": "H10 — Funciones de texto y procesamiento de cadenas",
+          "categoria": "excel",
+          "path": "Excel/H10.md"
+        },
+        {
+          "id": "H11",
+          "label": "H11 — Funciones de fecha, hora y calendarios",
+          "categoria": "excel",
+          "path": "Excel/H11.md"
+        },
+        {
+          "id": "H12",
+          "label": "H12 — Funciones de búsqueda y referencia",
+          "categoria": "excel",
+          "path": "Excel/H12.md"
+        },
+        {
+          "id": "H13",
+          "label": "H13 — Funciones de información, bases de datos y compatibilidad",
+          "categoria": "excel",
+          "path": "Excel/H13.md"
+        },
+        {
+          "id": "H14",
+          "label": "H14 — Funciones financieras y modelos económicos",
+          "categoria": "excel",
+          "path": "Excel/H14.md"
+        },
+        {
+          "id": "H15",
+          "label": "H15 — Funciones de ingeniería y aplicaciones especializadas",
+          "categoria": "excel",
+          "path": "Excel/H15.md"
+        },
+        {
+          "id": "H16",
+          "label": "H16 — Matrices dinámicas, LET, LAMBDA y fórmulas avanzadas",
+          "categoria": "excel",
+          "path": "Excel/H16.md"
+        },
+        {
+          "id": "H17",
+          "label": "H17 — Importación, limpieza y transformación de datos",
+          "categoria": "excel",
+          "path": "Excel/H17.md"
+        },
+        {
+          "id": "H18",
+          "label": "H18 — Visualización de información y diseño de gráficos",
+          "categoria": "excel",
+          "path": "Excel/H18.md"
+        },
+        {
+          "id": "H19",
+          "label": "H19 — Tablas dinámicas y análisis multidimensional",
+          "categoria": "excel",
+          "path": "Excel/H19.md"
+        },
+        {
+          "id": "H20",
+          "label": "H20 — Análisis de hipótesis, optimización y escenarios",
+          "categoria": "excel",
+          "path": "Excel/H20.md"
+        },
+        {
+          "id": "H21",
+          "label": "H21 — Power Query y lenguaje M",
+          "categoria": "excel",
+          "path": "Excel/H21.md"
+        },
+        {
+          "id": "H22",
+          "label": "H22 — Power Pivot, modelo de datos y DAX",
+          "categoria": "excel",
+          "path": "Excel/H22.md"
+        },
+        {
+          "id": "H23",
+          "label": "H23 — Dashboards, auditoría, seguridad y optimización",
+          "categoria": "excel",
+          "path": "Excel/H23.md"
+        },
+        {
+          "id": "H24",
+          "label": "H24 — Proyecto integrador: Sistema de análisis y gestión empresarial",
+          "categoria": "excel",
+          "path": "Excel/H24.md"
+        }
+      ]
+    },
+    {
+      "id": "google-sheets",
+      "label": "Google Sheets",
+      "folder": "Google_Sheets",
+      "modulos": [
+        {
+          "id": "G01",
+          "label": "G01 — Arquitectura, interfaz y configuración",
+          "categoria": "google-sheets",
+          "path": "Google_Sheets/G01.md"
+        },
+        {
+          "id": "G02",
+          "label": "G02 — Gestión, edición y herramientas de datos",
+          "categoria": "google-sheets",
+          "path": "Google_Sheets/G02.md"
+        },
+        {
+          "id": "G03",
+          "label": "G03 — Fórmulas, equivalencias y migración desde Excel",
+          "categoria": "google-sheets",
+          "path": "Google_Sheets/G03.md"
+        },
+        {
+          "id": "G04",
+          "label": "G04 — Funciones matriciales, QUERY y programación funcional",
+          "categoria": "google-sheets",
+          "path": "Google_Sheets/G04.md"
+        },
+        {
+          "id": "G05",
+          "label": "G05 — Funciones de importación, web y procesamiento de texto",
+          "categoria": "google-sheets",
+          "path": "Google_Sheets/G05.md"
+        },
+        {
+          "id": "G06",
+          "label": "G06 — Colaboración, permisos y control de cambios",
+          "categoria": "google-sheets",
+          "path": "Google_Sheets/G06.md"
+        },
+        {
+          "id": "G07",
+          "label": "G07 — Tablas dinámicas, gráficos y dashboards",
+          "categoria": "google-sheets",
+          "path": "Google_Sheets/G07.md"
+        },
+        {
+          "id": "G08",
+          "label": "G08 — Modelos avanzados, rendimiento y análisis",
+          "categoria": "google-sheets",
+          "path": "Google_Sheets/G08.md"
+        },
+        {
+          "id": "G09",
+          "label": "G09 — Integración con Google Workspace",
+          "categoria": "google-sheets",
+          "path": "Google_Sheets/G09.md"
+        },
+        {
+          "id": "G10",
+          "label": "G10 — Conectores, interoperabilidad y Sheets API",
+          "categoria": "google-sheets",
+          "path": "Google_Sheets/G10.md"
+        },
+        {
+          "id": "G11",
+          "label": "G11 — Seguridad, gobernanza y mantenimiento",
+          "categoria": "google-sheets",
+          "path": "Google_Sheets/G11.md"
+        },
+        {
+          "id": "G12",
+          "label": "G12 — Proyecto integrador de Google Sheets",
+          "categoria": "google-sheets",
+          "path": "Google_Sheets/G12.md"
+        }
+      ]
+    },
+    {
+      "id": "vba",
+      "label": "VBA",
+      "folder": "VBA",
+      "modulos": [
+        {
+          "id": "V01",
+          "label": "V01 — Introducción a VBA y entorno de desarrollo",
+          "categoria": "vba",
+          "path": "VBA/V01.md"
+        },
+        {
+          "id": "V02",
+          "label": "V02 — Sintaxis, variables y tipos de datos",
+          "categoria": "vba",
+          "path": "VBA/V02.md"
+        },
+        {
+          "id": "V03",
+          "label": "V03 — Control de flujo y lógica",
+          "categoria": "vba",
+          "path": "VBA/V03.md"
+        },
+        {
+          "id": "V04",
+          "label": "V04 — Procedimientos, funciones y modularidad",
+          "categoria": "vba",
+          "path": "VBA/V04.md"
+        },
+        {
+          "id": "V05",
+          "label": "V05 — Modelo de objetos de Excel",
+          "categoria": "vba",
+          "path": "VBA/V05.md"
+        },
+        {
+          "id": "V06",
+          "label": "V06 — Rangos, tablas y transformación de datos",
+          "categoria": "vba",
+          "path": "VBA/V06.md"
+        },
+        {
+          "id": "V07",
+          "label": "V07 — Eventos y automatización del libro",
+          "categoria": "vba",
+          "path": "VBA/V07.md"
+        },
+        {
+          "id": "V08",
+          "label": "V08 — Interfaces de usuario y formularios",
+          "categoria": "vba",
+          "path": "VBA/V08.md"
+        },
+        {
+          "id": "V09",
+          "label": "V09 — Archivos, carpetas y entrada/salida",
+          "categoria": "vba",
+          "path": "VBA/V09.md"
+        },
+        {
+          "id": "V10",
+          "label": "V10 — Depuración, errores y pruebas",
+          "categoria": "vba",
+          "path": "VBA/V10.md"
+        },
+        {
+          "id": "V11",
+          "label": "V11 — Integración con aplicaciones y servicios",
+          "categoria": "vba",
+          "path": "VBA/V11.md"
+        },
+        {
+          "id": "V12",
+          "label": "V12 — Programación avanzada y arquitectura",
+          "categoria": "vba",
+          "path": "VBA/V12.md"
+        },
+        {
+          "id": "V13",
+          "label": "V13 — Rendimiento y optimización",
+          "categoria": "vba",
+          "path": "VBA/V13.md"
+        },
+        {
+          "id": "V14",
+          "label": "V14 — Seguridad, compatibilidad y despliegue",
+          "categoria": "vba",
+          "path": "VBA/V14.md"
+        },
+        {
+          "id": "V15",
+          "label": "V15 — Proyecto integrador profesional en VBA",
+          "categoria": "vba",
+          "path": "VBA/V15.md"
+        }
+      ]
+    },
+    {
+      "id": "apps-script",
+      "label": "Apps Script",
+      "folder": "Apps_Script",
+      "modulos": [
+        {
+          "id": "A01",
+          "label": "A01 — Fundamentos de programación y JavaScript desde cero",
+          "categoria": "apps-script",
+          "path": "Apps_Script/A01.md"
+        },
+        {
+          "id": "A02",
+          "label": "A02 — JavaScript intermedio: funciones, arrays y objetos",
+          "categoria": "apps-script",
+          "path": "Apps_Script/A02.md"
+        },
+        {
+          "id": "A03",
+          "label": "A03 — JavaScript avanzado: prototipos, clases y asincronía",
+          "categoria": "apps-script",
+          "path": "Apps_Script/A03.md"
+        },
+        {
+          "id": "A04",
+          "label": "A04 — Entorno de Google Apps Script y runtime V8",
+          "categoria": "apps-script",
+          "path": "Apps_Script/A04.md"
+        },
+        {
+          "id": "A05",
+          "label": "A05 — Automatización de Google Sheets con SpreadsheetApp",
+          "categoria": "apps-script",
+          "path": "Apps_Script/A05.md"
+        },
+        {
+          "id": "A06",
+          "label": "A06 — Triggers, eventos y flujos de trabajo",
+          "categoria": "apps-script",
+          "path": "Apps_Script/A06.md"
+        },
+        {
+          "id": "A07",
+          "label": "A07 — Google Drive, Docs, Forms y Gmail",
+          "categoria": "apps-script",
+          "path": "Apps_Script/A07.md"
+        },
+        {
+          "id": "A08",
+          "label": "A08 — Servicios avanzados y Google Workspace APIs",
+          "categoria": "apps-script",
+          "path": "Apps_Script/A08.md"
+        },
+        {
+          "id": "A09",
+          "label": "A09 — Interfaces HTML Service y aplicaciones web",
+          "categoria": "apps-script",
+          "path": "Apps_Script/A09.md"
+        },
+        {
+          "id": "A10",
+          "label": "A10 — Integraciones externas, JSON y APIs HTTP",
+          "categoria": "apps-script",
+          "path": "Apps_Script/A10.md"
+        },
+        {
+          "id": "A11",
+          "label": "A11 — Arquitectura de software y patrones en Apps Script",
+          "categoria": "apps-script",
+          "path": "Apps_Script/A11.md"
+        },
+        {
+          "id": "A12",
+          "label": "A12 — Testing, depuración, Git y clasp",
+          "categoria": "apps-script",
+          "path": "Apps_Script/A12.md"
+        },
+        {
+          "id": "A13",
+          "label": "A13 — Rendimiento, cuotas y procesamiento por lotes",
+          "categoria": "apps-script",
+          "path": "Apps_Script/A13.md"
+        },
+        {
+          "id": "A14",
+          "label": "A14 — Seguridad, permisos, gobernanza y publicación",
+          "categoria": "apps-script",
+          "path": "Apps_Script/A14.md"
+        },
+        {
+          "id": "A15",
+          "label": "A15 — Proyecto integrador profesional de Apps Script",
+          "categoria": "apps-script",
+          "path": "Apps_Script/A15.md"
+        }
+      ]
+    }
+  ]
+}
