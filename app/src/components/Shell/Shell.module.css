@@ -110,3 +110,43 @@
   border-left-color: var(--color-accent);
   font-weight: 600;
 }
+
+.hamburger {
+  display: none;
+}
+
+.backdrop {
+  position: fixed;
+  inset: 60px 0 0 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+@media (max-width: 767px) {
+  .grid {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "header"
+      "main";
+  }
+
+  .sidebar {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    bottom: 0;
+    width: 280px;
+    background: var(--color-bg);
+    transform: translateX(-100%);
+    transition: transform 180ms ease;
+    z-index: 2;
+  }
+
+  .drawerOpen .sidebar {
+    transform: translateX(0);
+  }
+
+  .hamburger {
+    display: inline-flex;
+  }
+}

@@ -142,3 +142,12 @@ Para ver cualquier módulo real: `/_md/:categoria/:modulo` (solo dev). El catál
 - Favorito por módulo: `<FavoriteButton>` en `ModuloView`, botón ghost con ☆/★.
 - Export/Import: dos botones en `Header` (vanilla DOM, descarga JSON y lee `<input type="file">`). Un export legacy se importa sin perder nada (campo `theme` se ignora).
 - `last` se actualiza al navegar a un módulo (compat legacy; sin uso propio todavía).
+
+## Responsive y accesibilidad
+
+- Breakpoint: **768px**. ≥768 layout 2 columnas fija; <768 sidebar oculta + hamburger `☰` en el header abre un drawer con backdrop.
+- Drawer cierra solo al navegar (useLocation effect) y con tecla `Escape`.
+- Foco visible siempre (`:focus-visible` outline accent, heredado de `base.css`).
+- Contraste AA en ambos temas (verificado en Feature 2).
+- Umbrales Lighthouse móvil acordados (a medir en Feature 12 contra deploy real): **Accesibilidad ≥ 95**, **Performance ≥ 85**, **Best Practices ≥ 95**. SEO se decide con URL real.
+- Pendiente a11y avanzado: focus trap en drawer, `prefers-reduced-motion`, atajos de teclado.
