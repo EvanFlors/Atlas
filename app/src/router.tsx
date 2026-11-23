@@ -8,20 +8,26 @@ import NotFound from './routes/NotFound'
 import UIGallery from './routes/UIGallery'
 import MDPreview from './routes/MDPreview'
 
-export const router = createBrowserRouter([
+// Vite BASE_URL siempre viene con trailing slash (p.ej. "/Atlas/"); Router no lo quiere.
+const basename = import.meta.env.BASE_URL.replace(/\/$/, '')
+
+export const router = createBrowserRouter(
+  [
     {
-        element: <Shell />,
-        children: [
-            { path: '/', element: <Home /> },
-            { path: '/:categoria', element: <CategoriaView /> },
-            { path: '/:categoria/:modulo', element: <ModuloView /> },
-            { path: '*', element: <NotFound /> },
-        ],
+      element: <Shell />,
+      children: [
+        { path: '/', element: <Home /> },
+        { path: '/:categoria', element: <CategoriaView /> },
+        { path: '/:categoria/:modulo', element: <ModuloView /> },
+        { path: '*', element: <NotFound /> },
+      ],
     },
     ...(import.meta.env.DEV
-        ? [
-              { path: '/_ui', element: <UIGallery /> },
-              { path: '/_md/:categoria/:modulo', element: <MDPreview /> },
-          ]
-        : []),
-])
+      ? [
+          { path: '/_ui', element: <UIGallery /> },
+          { path: '/_md/:categoria/:modulo', element: <MDPreview /> },
+        ]
+      : []),
+  ],
+  { basename },
+)

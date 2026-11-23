@@ -3,8 +3,9 @@ import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vite'
 import { catalogPlugin } from './scripts/catalog-plugin.js'
 
-// https://vite.dev/config/
+// Project page en GitHub Pages: https://<user>.github.io/Atlas/
 export default defineConfig({
+  base: '/Atlas/',
   plugins: [
     react(),
     catalogPlugin({
