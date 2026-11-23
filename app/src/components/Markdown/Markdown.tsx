@@ -1,3 +1,4 @@
+import { useMemo } from 'react'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import rehypeHighlight from 'rehype-highlight'
@@ -18,7 +19,6 @@ interface Props {
   moduloId?: string
 }
 
-// Extrae texto plano de un nodo hast (para calcular slug del título de h2).
 function nodeText(node: any): string {
   if (!node) return ''
   if (node.value) return node.value as string
@@ -26,13 +26,27 @@ function nodeText(node: any): string {
   return ''
 }
 
+// Precompute section keys por línea del source. Determinista; inmune al double-invoke
+// de StrictMode (que rompe contadores mutantes en el renderer de react-markdown).
+function buildKeyByLine(source: string): Map<number, string> {
+  const map = new Map<number, string>()
+  const lines = source.split('\n')
+  let i = 0
+  lines.forEach((line, idx) => {
+    const m = /^##\s+(.+?)\s*$/.exec(line)
+    if (m) {
+      map.set(idx + 1, `${sectionSlug(m[1])}-${i++}`)
+    }
+  })
+  return map
+}
+
 export function Markdown({ source, currentCategoriaFolder, moduloId }: Props) {
+  const keyByLine = useMemo(() => (source ? buildKeyByLine(source) : new Map<number, string>()), [source])
+
   if (!source) {
     return <p className={styles.error}>Contenido no disponible.</p>
   }
-
-  // Contador local que se reinicia en cada render; react-markdown recorre nodos en orden.
-  let h2Index = 0
 
   return (
     <div className={styles.root}>
@@ -59,7 +73,8 @@ export function Markdown({ source, currentCategoriaFolder, moduloId }: Props) {
           },
           h2({ node, children }: any) {
             if (!moduloId) return <h2>{children}</h2>
-            const key = `${sectionSlug(nodeText(node))}-${h2Index++}`
+            const line = node?.position?.start?.line
+            const key = (line && keyByLine.get(line)) ?? `${sectionSlug(nodeText(node))}-0`
             return (
               <SectionHeading moduloId={moduloId} sectionKey={key}>
                 {children}
