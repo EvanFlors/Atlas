@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>ATLAS · redirigiendo…</title>
+    <script>
+      // SPA fallback para GitHub Pages: convierte /path/foo en /?p=/path/foo
+      // y redirige al index. El script en index.html lo restaura antes de React.
+      var l = window.location
+      l.replace(
+        l.protocol +
+          '//' +
+          l.hostname +
+          (l.port ? ':' + l.port : '') +
+          '/?p=' +
+          encodeURIComponent(l.pathname + l.search) +
+          l.hash,
+      )
+    </script>
+  </head>
+  <body></body>
+</html>

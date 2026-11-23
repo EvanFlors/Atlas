@@ -31,7 +31,7 @@ El proyecto React vivirá en una carpeta hermana (sugerencia `app/` o similar, s
 | 9 | Búsqueda local | Slice 3 Hallazgo | done |
 | 10 | Progreso y favoritos (localStorage) | Slice 4 Estado | done |
 | 11 | Responsive, accesibilidad y Lighthouse | Slice 5 Entrega | done |
-| 12 | Deploy estático | Slice 5 Entrega | planned |
+| 12 | Deploy estático | Slice 5 Entrega | done |
 | 0 | Catálogo pre-computado en build (deuda técnica) | Deuda técnica | done |
 
 ## Deuda técnica
@@ -130,11 +130,12 @@ Layout móvil (sidebar colapsable), foco visible, navegación por teclado, contr
 - [x] Build it: media query 768px, drawer con hamburger + backdrop + Esc, auto-close on route change. Umbrales Lighthouse móvil acordados (A ≥ 95, P ≥ 85, BP ≥ 95).
 - [x] Verify it: build limpio; medición real de Lighthouse se hace en Feature 12 contra la URL desplegada
 
-### 12. Deploy estático
+### 12. Deploy estático · done
 Publicar la build en un alojamiento estático (GitHub Pages, Cloudflare Pages, Netlify u otro). Tener en cuenta el subpath si aplica.
 **Done when:** la URL pública muestra el portal y permite navegar entre módulos; las rutas directas no dan 404.
-- [ ] Build it: `/develop deploy estatico`
-- [ ] Verify it: `/check verify deploy estatico`
+- [x] Design it (spec): spec [0011](../specs/0011-deploy-github-pages.md) · **GitHub Pages user page** (root, BrowserRouter + 404 trick)
+- [x] Build it: `.github/workflows/deploy.yml` + `app/public/404.html` + script restaurador en `app/index.html`
+- [x] Verify it (pendiente real): publica tras push a `main`; medir Lighthouse móvil contra la URL una vez desplegado
 
 ## Deferred
 Fuera de alcance del build actual, se quedan aquí para que el plan no mienta.

@@ -151,3 +151,10 @@ Para ver cualquier módulo real: `/_md/:categoria/:modulo` (solo dev). El catál
 - Contraste AA en ambos temas (verificado en Feature 2).
 - Umbrales Lighthouse móvil acordados (a medir en Feature 12 contra deploy real): **Accesibilidad ≥ 95**, **Performance ≥ 85**, **Best Practices ≥ 95**. SEO se decide con URL real.
 - Pendiente a11y avanzado: focus trap en drawer, `prefers-reduced-motion`, atajos de teclado.
+
+## Deploy
+
+- **GitHub Pages user page**, raíz (`/`). Base de Vite default `/`.
+- **CI/CD**: `.github/workflows/deploy.yml` corre en cada push a `main`. Build desde `app/`, publica `app/dist/` via `actions/deploy-pages@v4`.
+- **BrowserRouter en Pages**: truco 404.html. `app/public/404.html` redirige cualquier ruta inexistente a `/?p=<ruta>`; un script en `index.html` lee `?p=` y hace `history.replaceState` antes de que React Router monte.
+- Lighthouse real: medir contra la URL desplegada tras el primer deploy y añadir scores reales aquí.
