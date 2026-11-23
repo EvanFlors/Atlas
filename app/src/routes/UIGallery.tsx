@@ -40,6 +40,16 @@ export default function UIGallery() {
       </header>
 
       <section style={section}>
+        <h2 style={title}>Pipeline de Markdown · preview</h2>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--space-3)' }}>
+          <Link to="/_md/Excel/H01">Excel · H01</Link>
+          <Link to="/_md/Google_Sheets/G01">Google Sheets · G01 (con Mermaid)</Link>
+          <Link to="/_md/VBA/V01">VBA · V01</Link>
+          <Link to="/_md/Apps_Script/A01">Apps Script · A01</Link>
+        </div>
+      </section>
+
+      <section style={section}>
         <h2 style={title}>Button</h2>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--space-3)' }}>
           <Button>Primary md</Button>

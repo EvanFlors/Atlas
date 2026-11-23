@@ -22,10 +22,10 @@ El proyecto React vivirá en una carpeta hermana (sugerencia `app/` o similar, s
 |---|---------|-------|--------|
 | 1 | Stack y scaffold | Fundación | done |
 | 2 | Sistema de diseño UI | Fundación | done |
-| 3 | Pipeline de .md (carga y mapeo a componente) | Fundación | planned |
-| 4 | Shell de la app (layout, sidebar, routing) | Slice 1 Tracer | planned |
-| 5 | Catálogo desde contenidos | Slice 1 Tracer | planned |
-| 6 | Página de módulo con Markdown básico | Slice 1 Tracer | planned |
+| 3 | Pipeline de .md (carga y mapeo a componente) | Fundación | done |
+| 4 | Shell de la app (layout, sidebar, routing) | Slice 1 Tracer | done |
+| 5 | Catálogo desde contenidos | Slice 1 Tracer | done |
+| 6 | Página de módulo con Markdown básico | Slice 1 Tracer | done |
 | 7 | Markdown enriquecido (GFM, código resaltado, Mermaid) | Slice 2 Render | planned |
 | 8 | Navegación prev, next y breadcrumbs | Slice 3 Hallazgo | planned |
 | 9 | Búsqueda local | Slice 3 Hallazgo | planned |
@@ -47,31 +47,35 @@ Lenguaje visual mínimo: tipografía, escala de tamaños, paleta (light y dark),
 - [x] Build it: `/develop sistema de diseno ui`
 - [x] Verify it: `/check verify sistema de diseno ui`
 
-### 3. Pipeline de .md (carga y mapeo a componente) · needs a decision
+### 3. Pipeline de .md (carga y mapeo a componente) · done
 Cómo los `.md` de `./contenidos` llegan a un componente React: dónde se cargan (build vs runtime), cómo se parsean, cómo se mapean nodos Markdown (encabezados, código, enlaces, imágenes, tablas, Mermaid) a componentes propios del sistema de diseño. Esta es la decisión más cargada del proyecto.
 **Done when:** una función o hook devuelve el contenido de un `.md` dado su ruta en `contenidos/`, y los nodos se renderizan con los componentes del sistema de diseño.
-- [ ] Design it (spec): `/architect pipeline de md`
+- [x] Design it (spec): `/architect pipeline de md` · spec [0003](../specs/0003-pipeline-de-md.md) · code in `app/src/lib/md/`, `app/src/components/Markdown/`, `app/src/routes/MDPreview.tsx`
+- [x] Build it: `/develop pipeline de md`
+- [x] Verify it: `/check verify pipeline de md`
 
 ## Slice 1: Tracer bullet (un módulo visible de punta a punta)
 
 Objetivo del slice: ver un `.md` real (por ejemplo `contenidos/Excel/H01.md`) renderizado dentro del shell, navegable desde el sidebar. Todo lo mínimo para probar que el stack, el diseño y el pipeline encajan.
 
-### 4. Shell de la app (layout, sidebar, routing) · needs a decision
+### 4. Shell de la app (layout, sidebar, routing) · done
 Layout de dos columnas (sidebar de categorías y módulos, área de contenido), header con título y toggle de tema, rutas por categoría y por módulo.
 **Done when:** las rutas `/`, `/:categoria` y `/:categoria/:modulo` resuelven a vistas distintas; el sidebar resalta el módulo activo.
-- [ ] Design it (spec): `/architect shell de la app`
+- [x] Design it (spec): `/architect shell de la app` · spec [0004](../specs/0004-shell-de-la-app.md) · code in `app/src/components/Shell/`, `app/src/routes/`, `app/src/lib/md/translateLinks.ts`
+- [x] Build it: `/develop shell de la app`
+- [x] Verify it: `/check verify shell de la app`
 
-### 5. Catálogo desde contenidos
+### 5. Catálogo desde contenidos · done
 Generar el índice de categorías y módulos leyendo `./contenidos`. Decisión abierta en el spec del pipeline sobre si se construye en build time o se lee `catalogo.json` existente.
 **Done when:** el sidebar lista las cuatro categorías con sus módulos, enlazando a rutas válidas.
-- [ ] Build it: `/develop catalogo desde contenidos`
-- [ ] Verify it: `/check verify catalogo desde contenidos`
+- [x] Build it: absorbida en spec [0003](../specs/0003-pipeline-de-md.md) (`CATALOG` en `app/src/lib/md/catalog.ts`) y spec [0004](../specs/0004-shell-de-la-app.md) (sidebar en `app/src/components/Shell/Sidebar.tsx`)
+- [x] Verify it: 4 categorías + 66 módulos visibles en sidebar, cada uno enlaza a `/:categoria/:modulo`
 
-### 6. Página de módulo con Markdown básico
+### 6. Página de módulo con Markdown básico · done
 Renderiza el `.md` del módulo activo con el mapeo definido en la feature 3. Markdown plano (párrafos, listas, encabezados, enlaces, código inline). Deja GFM, resaltado de sintaxis y Mermaid para la siguiente slice.
 **Done when:** `H01.md` se ve correctamente en el navegador con tipografía y espaciado del sistema de diseño.
-- [ ] Build it: `/develop pagina de modulo basica`
-- [ ] Verify it: `/check verify pagina de modulo basica`
+- [x] Build it: absorbida en spec [0003](../specs/0003-pipeline-de-md.md) (`<Markdown />`) y spec [0004](../specs/0004-shell-de-la-app.md) (ruta `/:categoria/:modulo` en `app/src/routes/ModuloView.tsx`). GFM también entra aquí (ver Consequences en spec 0003).
+- [x] Verify it: `/excel/H01` renderiza H01 completo en `http://localhost:3333/excel/H01`
 
 ## Slice 2: Render completo
 
