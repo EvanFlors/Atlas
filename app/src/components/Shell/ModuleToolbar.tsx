@@ -42,7 +42,18 @@ export function ModuleToolbar({ moduloId, source }: Props) {
           <ul className={styles.tocList}>
             {headings.map((h) => (
               <li key={h.key}>
-                <a href={`#${h.key}`}>{h.title}</a>
+                <a
+                  href={`#${h.key}`}
+                  onClick={(e) => {
+                    e.preventDefault()
+                    const el = document.getElementById(h.key)
+                    el?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                    const details = e.currentTarget.closest('details')
+                    if (details) details.removeAttribute('open')
+                  }}
+                >
+                  {h.title}
+                </a>
               </li>
             ))}
           </ul>
