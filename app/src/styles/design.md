@@ -127,3 +127,9 @@ El componente `<Markdown source={raw} />` (en `app/src/components/Markdown/`) pa
 - Bloques `mermaid` → `<MermaidBlock>` que hace lazy import del paquete `mermaid` y renderiza el SVG; si falla la carga o hay error de sintaxis, muestra el código fuente como fallback. Mermaid corre con `securityLevel: 'strict'`.
 
 Para ver cualquier módulo real: `/_md/:categoria/:modulo` (solo dev). El catálogo tipado vive en `app/src/lib/md/catalog.ts` (`import { CATALOG } from '...'`), con las 4 categorías y 66 módulos listos para alimentar al sidebar en Feature 4.
+
+## Navegación y hallazgo
+
+- **Breadcrumbs** (`app/src/components/Shell/Breadcrumbs.tsx`) al tope del `main`: calcula `Home / Categoria / Modulo` desde `useLocation` + `CATALOG`. En `/` no se muestra.
+- **Prev/Next** (`app/src/components/Shell/PrevNext.tsx`) al pie de cada módulo: usa `getAdjacent(categoriaId, moduloId)` de `app/src/lib/md/adjacent.ts`. Sin salto cross-category.
+- **Búsqueda local** en el sidebar: input tipo search filtra módulos por `label` (incluye id + título) y oculta categorías vacías. Estado local en `Sidebar`, sobrevive al cambio de ruta (el Sidebar vive en Shell).

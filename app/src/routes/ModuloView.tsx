@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { Markdown } from '../components/Markdown/Markdown'
+import { PrevNext } from '../components/Shell/PrevNext'
 import { loadModule, ModuleNotFound } from '../lib/md/loader'
 import { CATALOG } from '../lib/md/catalog'
 import NotFound from './NotFound'
@@ -27,5 +28,10 @@ export default function ModuloView() {
 
   if (!cat || !mod) return <NotFound />
   if (error) return <p style={{ color: 'crimson' }}>{error}</p>
-  return <Markdown source={source} currentCategoriaFolder={cat.folder} />
+  return (
+    <>
+      <Markdown source={source} currentCategoriaFolder={cat.folder} />
+      <PrevNext categoriaId={cat.id} moduloId={mod.id} />
+    </>
+  )
 }

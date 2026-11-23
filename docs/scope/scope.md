@@ -27,8 +27,8 @@ El proyecto React vivirá en una carpeta hermana (sugerencia `app/` o similar, s
 | 5 | Catálogo desde contenidos | Slice 1 Tracer | done |
 | 6 | Página de módulo con Markdown básico | Slice 1 Tracer | done |
 | 7 | Markdown enriquecido (GFM, código resaltado, Mermaid) | Slice 2 Render | done |
-| 8 | Navegación prev, next y breadcrumbs | Slice 3 Hallazgo | planned |
-| 9 | Búsqueda local | Slice 3 Hallazgo | planned |
+| 8 | Navegación prev, next y breadcrumbs | Slice 3 Hallazgo | done |
+| 9 | Búsqueda local | Slice 3 Hallazgo | done |
 | 10 | Progreso y favoritos (localStorage) | Slice 4 Estado | planned |
 | 11 | Responsive, accesibilidad y Lighthouse | Slice 5 Entrega | planned |
 | 12 | Deploy estático | Slice 5 Entrega | planned |
@@ -98,17 +98,19 @@ Añadir tablas, listas de tareas, strikethrough (remark-gfm), resaltado de sinta
 
 ## Slice 3: Hallazgo
 
-### 8. Navegación prev, next y breadcrumbs
+### 8. Navegación prev, next y breadcrumbs · done
 Botones de anterior y siguiente al pie del módulo; breadcrumbs en el header. Orden tomado del catálogo.
 **Done when:** al final de cualquier módulo se puede saltar al siguiente de la misma categoría, y los breadcrumbs reflejan la ruta.
-- [ ] Build it: `/develop navegacion prev next y breadcrumbs`
-- [ ] Verify it: `/check verify navegacion prev next y breadcrumbs`
+- [x] Design it (spec): spec [0007](../specs/0007-navegacion-prev-next-breadcrumbs.md)
+- [x] Build it: `PrevNext.tsx`, `Breadcrumbs.tsx`, `adjacent.ts`. Breadcrumbs al tope del `main` (no header, decisión en la spec).
+- [x] Verify it: build limpio, componentes integrados en Shell + ModuloView
 
-### 9. Búsqueda local
+### 9. Búsqueda local · done
 Campo de búsqueda que filtra módulos por título y, si el pipeline lo permite sin coste, por texto del `.md`. Todo en cliente.
 **Done when:** escribir una palabra filtra la lista del sidebar o muestra una lista de resultados con enlace al módulo.
-- [ ] Build it: `/develop busqueda local`
-- [ ] Verify it: `/check verify busqueda local`
+- [x] Design it (spec): spec [0008](../specs/0008-busqueda-local.md)
+- [x] Build it: input de búsqueda en `Sidebar.tsx`, filtra por `label` (id + título). Full-text del `.md` queda como follow-up.
+- [x] Verify it: build limpio, filtro funciona con categorías auto-ocultas
 
 ## Slice 4: Estado del usuario
 
