@@ -115,10 +115,25 @@
   margin: var(--space-6) 0;
 }
 
+/*
+  Scroll shadows en tablas (Lea Verou pattern). Dos capas: "covers" (sólidas,
+  del color del bg) que ocultan la sombra cuando no hay overflow, y "shadows"
+  (radial degradados) que aparecen al scrollear. Las covers usan attachment
+  local (se mueven con el scroll); las shadows scroll (fijas al borde).
+*/
 .tableWrap {
   overflow-x: auto;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
+  background:
+    linear-gradient(to right, var(--color-bg-elevated) 30%, transparent),
+    linear-gradient(to right, transparent, var(--color-bg-elevated) 70%) 100% 0,
+    radial-gradient(farthest-side at 0% 50%, rgba(0, 0, 0, 0.25), transparent),
+    radial-gradient(farthest-side at 100% 50%, rgba(0, 0, 0, 0.25), transparent) 100% 0;
+  background-repeat: no-repeat;
+  background-color: var(--color-bg-elevated);
+  background-size: 40px 100%, 40px 100%, 14px 100%, 14px 100%;
+  background-attachment: local, local, scroll, scroll;
 }
 
 .table {
@@ -166,6 +181,17 @@
   max-width: 100%;
   height: auto;
   border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  cursor: zoom-in;
+}
+
+.figureLink {
+  display: inline-block;
+  line-height: 0;
+}
+.figureLink:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
   border-radius: var(--radius-md);
 }
 .caption {

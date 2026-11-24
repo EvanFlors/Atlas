@@ -105,17 +105,26 @@ export function Markdown({ source, currentCategoriaFolder, moduloId }: Props) {
             )
           },
           img({ src, alt }) {
+            const url = typeof src === 'string' ? src : ''
             return (
               <span className={styles.figure}>
-                <img
-                  src={typeof src === 'string' ? src : ''}
-                  alt={alt ?? ''}
-                  loading="lazy"
-                  decoding="async"
-                  onError={(e) => {
-                    ;(e.currentTarget as HTMLImageElement).style.display = 'none'
-                  }}
-                />
+                <a
+                  href={url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.figureLink}
+                  aria-label={alt ? `Abrir imagen en grande: ${alt}` : 'Abrir imagen en grande'}
+                >
+                  <img
+                    src={url}
+                    alt={alt ?? ''}
+                    loading="lazy"
+                    decoding="async"
+                    onError={(e) => {
+                      ;(e.currentTarget as HTMLImageElement).style.display = 'none'
+                    }}
+                  />
+                </a>
                 {alt ? <span className={styles.caption}>{alt}</span> : null}
               </span>
             )
