@@ -41,7 +41,9 @@
 
 .main {
   grid-area: main;
+  overflow-x: hidden;
   overflow-y: auto;
+  min-width: 0;
   padding: var(--space-5) var(--space-6);
 }
 
@@ -376,11 +378,23 @@
   }
 
   .prevNext {
+    flex-direction: column;
     gap: var(--space-2);
   }
 
   .prevNextLink {
-    max-width: 50%;
-    padding: var(--space-2);
+    max-width: none;
+    width: 100%;
+    padding: var(--space-3);
+    background: var(--color-bg-elevated);
+    border: 1px solid var(--color-border);
+  }
+
+  .prevNextNext {
+    margin-left: 0;
+  }
+
+  .prevNextName {
+    white-space: normal;
   }
 }
