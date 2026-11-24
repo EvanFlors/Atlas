@@ -42,12 +42,26 @@ function buildKeyByLine(source: string): Map<number, string> {
   return map
 }
 
-// Convierte [\latex...] → $\latex...$ y [\\latex...]\n\n (bloques solos) a $$...$$
-// para que remark-math los procese. Heurística: brackets que arrancan con
-// backslash + comando LaTeX. Deja intactos [texto normal].
+// Convierte las fórmulas matemáticas a $$...$$ (display math) para que remark-math
+// las procese. Reconoce dos sintaxis del contenido:
+//   [P(X)=\binom{5}{2}...] → $$...$$
+//   $\sigma^2=\frac{...}$  → $$...$$
+// Requiere que el contenido tenga al menos un \comando LaTeX dentro para evitar
+// falsos positivos con moneda ($35.50) o refs de Excel ($A$1).
+// remark-math corre con singleDollarTextMath: false, así `$` suelto no se procesa.
 function preprocessLatex(src: string): string {
-  // Inline: [\cmd{...}=\frac{...}] → $...$
-  return src.replace(/\[(\\\w[^\]]*?)\]/g, (_, body: string) => `$${body}$`)
+  const BLOCK = '$$'
+  // Brackets que contienen un \comando LaTeX dentro.
+  let out = src.replace(
+    /\[([^\]\n]*\\[a-zA-Z]+[^\]\n]*)\]/g,
+    (_, body: string) => `${BLOCK}${body}${BLOCK}`,
+  )
+  // $...$ cuyo contenido arranca con \comando LaTeX.
+  out = out.replace(
+    /\$(\\[a-zA-Z]+[^$\n]*?)\$/g,
+    (_, body: string) => `${BLOCK}${body}${BLOCK}`,
+  )
+  return out
 }
 
 export function Markdown({ source, currentCategoriaFolder, moduloId }: Props) {
@@ -63,7 +77,7 @@ export function Markdown({ source, currentCategoriaFolder, moduloId }: Props) {
   return (
     <div className={styles.root}>
       <ReactMarkdown
-        remarkPlugins={[remarkGfm, remarkMath]}
+        remarkPlugins={[remarkGfm, [remarkMath, { singleDollarTextMath: false }]]}
         rehypePlugins={[
           [rehypeHighlight, { detect: true, ignoreMissing: true }],
           [rehypeKatex, { throwOnError: false, strict: false }],
