@@ -43,22 +43,30 @@ function buildKeyByLine(source: string): Map<number, string> {
 }
 
 // Convierte las fórmulas matemáticas a $$...$$ (display math) para que remark-math
-// las procese. Reconoce dos sintaxis del contenido:
-//   [P(X)=\binom{5}{2}...] → $$...$$
-//   $\sigma^2=\frac{...}$  → $$...$$
-// Requiere que el contenido tenga al menos un \comando LaTeX dentro para evitar
-// falsos positivos con moneda ($35.50) o refs de Excel ($A$1).
+// las procese. Reconoce tres sintaxis del contenido:
+//   \[s^2=\frac{...}\]      ← pandoc display (lo más común en los .md)
+//   [P(X)=\binom{5}{2}...]  ← brackets planos
+//   $\sigma^2=\frac{...}$   ← dollar inline
+// Requiere que haya al menos un \comando LaTeX dentro para evitar falsos
+// positivos con moneda ($35.50) o refs de Excel ($A$1).
 // remark-math corre con singleDollarTextMath: false, así `$` suelto no se procesa.
 function preprocessLatex(src: string): string {
   const BLOCK = '$$'
-  // Brackets que contienen un \comando LaTeX dentro.
+  // Orden importa: procesar $...$ primero para que las conversiones posteriores
+  // no vean fragmentos $<body>$ dentro de un $$...$$ recién creado y los re-envuelvan.
+  // 1. $...$ cuyo contenido arranca con \<cmd>.
   let out = src.replace(
-    /\[([^\]\n]*\\[a-zA-Z]+[^\]\n]*)\]/g,
+    /\$(\\[a-zA-Z]+[^$\n]*?)\$/g,
     (_, body: string) => `${BLOCK}${body}${BLOCK}`,
   )
-  // $...$ cuyo contenido arranca con \comando LaTeX.
+  // 2. Pandoc display \[...\] con \<cmd> dentro.
   out = out.replace(
-    /\$(\\[a-zA-Z]+[^$\n]*?)\$/g,
+    /\\\[([^\n]*?\\[a-zA-Z]+[^\n]*?)\\\]/g,
+    (_, body: string) => `${BLOCK}${body}${BLOCK}`,
+  )
+  // 3. Brackets planos [...] con \<cmd> dentro.
+  out = out.replace(
+    /\[([^\]\n]*\\[a-zA-Z]+[^\]\n]*)\]/g,
     (_, body: string) => `${BLOCK}${body}${BLOCK}`,
   )
   return out
