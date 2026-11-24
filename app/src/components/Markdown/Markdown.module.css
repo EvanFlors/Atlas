@@ -267,24 +267,22 @@
 }
 
 /*
-  Bloque de fórmula: muestra el texto LaTeX tal cual con estilo visual claro
-  (mono, centrado, bg elevated, borde accent a la izquierda). No se parsea
-  como math; es prosa técnica legible por el lector.
+  Fórmulas KaTeX: display math ya viene envuelto en .katex-display. Añadimos
+  padding y border suave para que destaque del texto normal, sin competir
+  con el render tipográfico de KaTeX.
 */
-.formula {
-  font-family: var(--font-mono);
-  font-size: 1.05em;
-  text-align: center;
-  padding: var(--space-4) var(--space-5);
+.root :global(.katex-display) {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: var(--space-3) var(--space-4);
+  margin: var(--space-2) 0;
   background: var(--color-bg-elevated);
   border-left: 3px solid var(--color-accent);
   border-radius: var(--radius-md);
-  overflow-x: auto;
-  color: var(--color-text);
-  line-height: 1.6;
-  white-space: pre-wrap;
-  word-break: normal;
-  margin: var(--space-2) 0;
+}
+
+.root :global(.katex) {
+  font-size: 1.1em;
 }
 
 .error {

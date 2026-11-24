@@ -1,7 +1,9 @@
 import { useMemo, useState } from 'react'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
+import remarkMath from 'remark-math'
 import rehypeHighlight from 'rehype-highlight'
+import rehypeKatex from 'rehype-katex'
 import { Link } from '../ui/Link/Link'
 import { List } from '../ui/List/List'
 import { Code } from '../ui/Code/Code'
@@ -40,15 +42,13 @@ function buildKeyByLine(source: string): Map<number, string> {
   return map
 }
 
-// Las fórmulas en el contenido vienen como pandoc display math: \[LATEX\].
-// Las convertimos a un fenced code block con lang=formula, para renderizarlas
-// después con estilo (sin motor de math, puro CSS). El texto LaTeX se muestra
-// legible en mono centrado con acento visual.
+// Las fórmulas en el contenido usan pandoc display math: \[LATEX\] (línea sola).
+// Las convertimos a la sintaxis estándar $$LATEX$$ que remark-math + rehype-katex
+// renderizan como imprenta matemática real (símbolos, exponentes, fracciones).
+// remark-math corre con singleDollarTextMath: false para no confundir el `$` de
+// moneda ($35.50) ni refs Excel ($A$1) con delimitadores matemáticos.
 function preprocessFormulas(src: string): string {
-  return src.replace(
-    /^\\\[(.+?)\\\]\s*$/gm,
-    (_, body: string) => `\n\`\`\`formula\n${body.trim()}\n\`\`\`\n`,
-  )
+  return src.replace(/^\\\[(.+?)\\\]\s*$/gm, (_, body: string) => `\n$$\n${body.trim()}\n$$\n`)
 }
 
 export function Markdown({ source, currentCategoriaFolder, moduloId }: Props) {
@@ -64,8 +64,11 @@ export function Markdown({ source, currentCategoriaFolder, moduloId }: Props) {
   return (
     <div className={styles.root}>
       <ReactMarkdown
-        remarkPlugins={[remarkGfm]}
-        rehypePlugins={[[rehypeHighlight, { detect: true, ignoreMissing: true }]]}
+        remarkPlugins={[remarkGfm, [remarkMath, { singleDollarTextMath: false }]]}
+        rehypePlugins={[
+          [rehypeHighlight, { detect: true, ignoreMissing: true }],
+          [rehypeKatex, { throwOnError: false, strict: false }],
+        ]}
         components={{
           a({ href, children, ...rest }) {
             if (href && isInternalContentLink(href)) {
@@ -104,9 +107,6 @@ export function Markdown({ source, currentCategoriaFolder, moduloId }: Props) {
             const lang = /language-(\w+)/.exec(codeClassName)?.[1]
             if (lang === 'mermaid') {
               return <MermaidBlock source={String(inner).trim()} />
-            }
-            if (lang === 'formula') {
-              return <div className={styles.formula}>{String(inner).trim()}</div>
             }
             return <Code block>{inner}</Code>
           },
