@@ -1,13 +1,16 @@
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
+import remarkMath from 'remark-math'
 import rehypeHighlight from 'rehype-highlight'
+import rehypeKatex from 'rehype-katex'
 import { Link } from '../ui/Link/Link'
 import { List } from '../ui/List/List'
 import { Code } from '../ui/Code/Code'
 import { Card } from '../ui/Card/Card'
 import { MermaidBlock } from './MermaidBlock'
 import { SectionHeading } from './SectionHeading'
+import { ImageModal } from './ImageModal'
 import { isInternalContentLink } from '../../lib/md/isInternalLink'
 import { translateContentHref } from '../../lib/md/translateLinks'
 import { sectionSlug } from '../../lib/progress/slug'
@@ -26,8 +29,6 @@ function nodeText(node: any): string {
   return ''
 }
 
-// Precompute section keys por línea del source. Determinista; inmune al double-invoke
-// de StrictMode (que rompe contadores mutantes en el renderer de react-markdown).
 function buildKeyByLine(source: string): Map<number, string> {
   const map = new Map<number, string>()
   const lines = source.split('\n')
@@ -41,8 +42,19 @@ function buildKeyByLine(source: string): Map<number, string> {
   return map
 }
 
+// Convierte [\latex...] → $\latex...$ y [\\latex...]\n\n (bloques solos) a $$...$$
+// para que remark-math los procese. Heurística: brackets que arrancan con
+// backslash + comando LaTeX. Deja intactos [texto normal].
+function preprocessLatex(src: string): string {
+  // Inline: [\cmd{...}=\frac{...}] → $...$
+  return src.replace(/\[(\\\w[^\]]*?)\]/g, (_, body: string) => `$${body}$`)
+}
+
 export function Markdown({ source, currentCategoriaFolder, moduloId }: Props) {
-  const keyByLine = useMemo(() => (source ? buildKeyByLine(source) : new Map<number, string>()), [source])
+  const [zoom, setZoom] = useState<{ src: string; alt: string } | null>(null)
+
+  const processed = useMemo(() => (source ? preprocessLatex(source) : ''), [source])
+  const keyByLine = useMemo(() => (processed ? buildKeyByLine(processed) : new Map<number, string>()), [processed])
 
   if (!source) {
     return <p className={styles.error}>Contenido no disponible.</p>
@@ -51,8 +63,11 @@ export function Markdown({ source, currentCategoriaFolder, moduloId }: Props) {
   return (
     <div className={styles.root}>
       <ReactMarkdown
-        remarkPlugins={[remarkGfm]}
-        rehypePlugins={[[rehypeHighlight, { detect: true, ignoreMissing: true }]]}
+        remarkPlugins={[remarkGfm, remarkMath]}
+        rehypePlugins={[
+          [rehypeHighlight, { detect: true, ignoreMissing: true }],
+          [rehypeKatex, { throwOnError: false, strict: false }],
+        ]}
         components={{
           a({ href, children, ...rest }) {
             if (href && isInternalContentLink(href)) {
@@ -106,33 +121,34 @@ export function Markdown({ source, currentCategoriaFolder, moduloId }: Props) {
           },
           img({ src, alt }) {
             const url = typeof src === 'string' ? src : ''
+            const caption = alt ?? ''
             return (
               <span className={styles.figure}>
-                <a
-                  href={url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={styles.figureLink}
-                  aria-label={alt ? `Abrir imagen en grande: ${alt}` : 'Abrir imagen en grande'}
+                <button
+                  type="button"
+                  onClick={() => setZoom({ src: url, alt: caption })}
+                  className={styles.figureBtn}
+                  aria-label={caption ? `Ampliar imagen: ${caption}` : 'Ampliar imagen'}
                 >
                   <img
                     src={url}
-                    alt={alt ?? ''}
+                    alt={caption}
                     loading="lazy"
                     decoding="async"
                     onError={(e) => {
                       ;(e.currentTarget as HTMLImageElement).style.display = 'none'
                     }}
                   />
-                </a>
-                {alt ? <span className={styles.caption}>{alt}</span> : null}
+                </button>
+                {caption ? <span className={styles.caption}>{caption}</span> : null}
               </span>
             )
           },
         }}
       >
-        {source}
+        {processed}
       </ReactMarkdown>
+      {zoom && <ImageModal src={zoom.src} alt={zoom.alt} onClose={() => setZoom(null)} />}
     </div>
   )
 }
