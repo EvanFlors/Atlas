@@ -4,6 +4,7 @@ import { useProgress } from '../../lib/progress/store'
 import { sectionSlug } from '../../lib/progress/slug'
 import { Breadcrumbs } from './Breadcrumbs'
 import { FavoriteButton } from './FavoriteButton'
+import { ReadingSizeToggle } from './ReadingSizeToggle'
 import styles from './Shell.module.css'
 
 type Props = { moduloId: string; source: string | null }
@@ -57,6 +58,7 @@ export function ModuleToolbar({ moduloId, source }: Props) {
               </ul>
             </details>
           )}
+          <ReadingSizeToggle />
           <FavoriteButton moduloId={moduloId} />
         </div>
       </div>

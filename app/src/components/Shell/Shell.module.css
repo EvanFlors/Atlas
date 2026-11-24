@@ -28,7 +28,8 @@
   font-weight: 700;
   color: var(--color-text);
   text-decoration: none;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .sidebar {
@@ -59,6 +60,15 @@
   background: var(--color-bg-elevated);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-sm);
+  transition: border-color 120ms ease, background 120ms ease;
+}
+
+.searchInput::placeholder {
+  color: var(--color-text-muted);
+}
+
+.searchInput:hover {
+  border-color: var(--color-text-muted);
 }
 
 .searchInput:focus-visible {
@@ -188,6 +198,77 @@
   height: 100%;
   background: var(--color-accent);
   transition: width 200ms ease;
+}
+
+.prevNext {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  gap: var(--space-4);
+  margin-top: var(--space-7);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--color-border);
+}
+
+.prevNextLink {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-width: 0;
+  max-width: 48%;
+  padding: var(--space-2) var(--space-3);
+  color: var(--color-text);
+  text-decoration: none;
+  border-radius: var(--radius-sm);
+  transition: color 120ms ease, background 120ms ease;
+}
+
+.prevNextLink:hover {
+  background: var(--color-bg-elevated);
+  color: var(--color-accent);
+}
+
+.prevNextIcon {
+  flex-shrink: 0;
+  color: var(--color-text-muted);
+  font-size: 18px;
+}
+
+.prevNextLink:hover .prevNextIcon {
+  color: var(--color-accent);
+}
+
+.prevNextText {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  line-height: 1.25;
+}
+
+.prevNextDir {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-text-muted);
+  font-weight: 600;
+}
+
+.prevNextName {
+  font-size: var(--text-sm);
+  color: var(--color-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 2px;
+}
+
+.prevNextNext {
+  margin-left: auto;
+}
+
+.prevNextNext .prevNextText {
+  align-items: flex-end;
+  text-align: right;
 }
 
 .tocDetails {

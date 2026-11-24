@@ -43,7 +43,15 @@ Dos temas, mismos nombres de token; cambia lo que hay detrás.
 **Sombras:**
 `--shadow-sm` (sutil, cards) · `--shadow-md` (modales, popovers, si llegan) · `--shadow-lg` (reservado).
 
-**Contraste:** los pares `text/bg`, `text/surface`, `accent-fg/accent` cumplen WCAG AA (texto ≥ 4.5:1, texto grande ≥ 3:1) en light y dark, verificado a ojo con el inspector del navegador. Si añades un color, verifícalo del mismo modo.
+**Contraste (calculado con fórmula WCAG 2.1 sobre los tokens):**
+
+| Par | Light | Dark | WCAG |
+|---|---|---|---|
+| `--color-text` sobre `--color-bg` | 16.5:1 | 14.75:1 | AAA ambos |
+| `--color-text-muted` sobre `--color-bg` | 6.4:1 | 6.96:1 | AA ambos |
+| `--color-accent-fg` sobre `--color-accent` (botón primario) | 6.56:1 | 7.68:1 | AA light, AAA dark |
+
+Body text cumple AAA (≥ 7:1). Texto muted y texto en botón primario cumplen AA (≥ 4.5:1). Si añades un color, calcula con una herramienta como contrast-ratio.com o el inspector del navegador antes de mergear.
 
 ## Espaciado
 
@@ -133,6 +141,7 @@ Para ver cualquier módulo real: `/_md/:categoria/:modulo` (solo dev). El catál
 - **Breadcrumbs** (`app/src/components/Shell/Breadcrumbs.tsx`) al tope del `main`: calcula `Home / Categoria / Modulo` desde `useLocation` + `CATALOG`. En `/` no se muestra.
 - **Prev/Next** (`app/src/components/Shell/PrevNext.tsx`) al pie de cada módulo: usa `getAdjacent(categoriaId, moduloId)` de `app/src/lib/md/adjacent.ts`. Sin salto cross-category.
 - **Búsqueda local** en el sidebar: input tipo search filtra módulos por `label` (incluye id + título) y oculta categorías vacías. Estado local en `Sidebar`, sobrevive al cambio de ruta (el Sidebar vive en Shell).
+- **Reading size toggle** en la banda del módulo: hook `useReadingSize` persiste en `localStorage['atlas.reading']` con valores `sm` | `md` | `lg`; aplica `data-reading` en `<html>`. CSS en `Markdown.module.css` cambia `font-size` y `line-height` del contenido (y `max-width` en `lg` para evitar líneas muy anchas).
 
 ## Progreso y favoritos
 
