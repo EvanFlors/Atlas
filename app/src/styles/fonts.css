@@ -13,3 +13,13 @@
   font-style: normal;
   font-display: swap;
 }
+
+/* El subset de JetBrains Mono no incluye Control Pictures (U+2400–U+243F),
+   donde vive ␠ (U+2420) usado en los ejemplos de espacios. Delegamos ese
+   rango a fuentes locales que sí lo traen. */
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: local('Cascadia Code'), local('DejaVu Sans Mono'), local('Noto Sans Symbols 2'), local('Apple Symbols');
+  unicode-range: U+2400-243F;
+  font-display: swap;
+}
