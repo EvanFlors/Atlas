@@ -31,10 +31,10 @@ export function ExportImport() {
   return (
     <>
       <Button variant="ghost" size="sm" onClick={onExport} aria-label="Exportar progreso">
-        <FiDownload /> Exportar
+        <FiDownload /> <span className="u-hide-mobile">Exportar</span>
       </Button>
       <Button variant="ghost" size="sm" onClick={onPickFile} aria-label="Importar progreso">
-        <FiUpload /> Importar
+        <FiUpload /> <span className="u-hide-mobile">Importar</span>
       </Button>
       <input
         ref={fileRef}

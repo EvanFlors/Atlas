@@ -36,7 +36,7 @@ export function ModuleToolbar({ moduloId, source }: Props) {
           {total > 0 && (
             <details className={styles.tocDetails}>
               <summary className={styles.tocSummary}>
-                <FiList /> Secciones
+                <FiList /> <span className="u-hide-mobile">Secciones</span>
               </summary>
               <ul className={styles.tocList}>
                 {headings.map((h) => (

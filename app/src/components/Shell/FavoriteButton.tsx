@@ -13,7 +13,7 @@ export function FavoriteButton({ moduloId }: { moduloId: string }) {
       aria-label={fav ? 'Quitar de favoritos' : 'Añadir a favoritos'}
       title={fav ? 'En favoritos' : 'Añadir a favoritos'}
     >
-      {fav ? <FaStar /> : <FaRegStar />} Favorito
+      {fav ? <FaStar /> : <FaRegStar />} <span className="u-hide-mobile">Favorito</span>
     </Button>
   )
 }

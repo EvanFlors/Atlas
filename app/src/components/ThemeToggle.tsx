@@ -31,7 +31,7 @@ export function ThemeToggle() {
       aria-label={`Tema actual: ${theme}. Cambiar al siguiente.`}
       title={`Tema: ${theme} (click para cambiar)`}
     >
-      {ICON[theme]} {LABEL[theme]}
+      {ICON[theme]} <span className="u-hide-mobile">{LABEL[theme]}</span>
     </Button>
   )
 }

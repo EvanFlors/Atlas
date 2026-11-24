@@ -17,7 +17,15 @@
 .sm {
     font-size: var(--text-sm);
     padding: var(--space-1) var(--space-3);
-    min-height: 32px;
+    min-height: 36px;
+}
+
+/* Touch target ≥ 40px en móvil (Apple HIG recomienda 44, concedemos 40 por UI densa) */
+@media (max-width: 599px) {
+    .sm {
+        min-height: 40px;
+        padding: var(--space-2) var(--space-3);
+    }
 }
 
 .md {

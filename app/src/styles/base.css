@@ -51,3 +51,8 @@ button {
   outline-offset: 2px;
   border-radius: var(--radius-sm);
 }
+
+/* Utility: ocultar en viewports estrechos (deja icono visible, quita texto) */
+@media (max-width: 599px) {
+  .u-hide-mobile { display: none !important; }
+}

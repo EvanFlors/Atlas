@@ -14,7 +14,7 @@ export function ReadingSizeToggle() {
       aria-label={`Tamaño de lectura: ${LABEL[size]}. Click para cambiar.`}
       title={`Tamaño de lectura: ${LABEL[size]}`}
     >
-      <FiType /> {size.toUpperCase()}
+      <FiType /> <span className="u-hide-mobile">{size.toUpperCase()}</span>
     </Button>
   )
 }
