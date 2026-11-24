@@ -1,9 +1,7 @@
 import { useMemo, useState } from 'react'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
-import remarkMath from 'remark-math'
 import rehypeHighlight from 'rehype-highlight'
-import rehypeKatex from 'rehype-katex'
 import { Link } from '../ui/Link/Link'
 import { List } from '../ui/List/List'
 import { Code } from '../ui/Code/Code'
@@ -42,40 +40,21 @@ function buildKeyByLine(source: string): Map<number, string> {
   return map
 }
 
-// Convierte las fórmulas matemáticas a $$...$$ (display math) para que remark-math
-// las procese. Reconoce tres sintaxis del contenido:
-//   \[s^2=\frac{...}\]      ← pandoc display (lo más común en los .md)
-//   [P(X)=\binom{5}{2}...]  ← brackets planos
-//   $\sigma^2=\frac{...}$   ← dollar inline
-// Requiere que haya al menos un \comando LaTeX dentro para evitar falsos
-// positivos con moneda ($35.50) o refs de Excel ($A$1).
-// remark-math corre con singleDollarTextMath: false, así `$` suelto no se procesa.
-function preprocessLatex(src: string): string {
-  const BLOCK = '$$'
-  // Orden importa: procesar $...$ primero para que las conversiones posteriores
-  // no vean fragmentos $<body>$ dentro de un $$...$$ recién creado y los re-envuelvan.
-  // 1. $...$ cuyo contenido arranca con \<cmd>.
-  let out = src.replace(
-    /\$(\\[a-zA-Z]+[^$\n]*?)\$/g,
-    (_, body: string) => `${BLOCK}${body}${BLOCK}`,
+// Las fórmulas en el contenido vienen como pandoc display math: \[LATEX\].
+// Las convertimos a un fenced code block con lang=formula, para renderizarlas
+// después con estilo (sin motor de math, puro CSS). El texto LaTeX se muestra
+// legible en mono centrado con acento visual.
+function preprocessFormulas(src: string): string {
+  return src.replace(
+    /^\\\[(.+?)\\\]\s*$/gm,
+    (_, body: string) => `\n\`\`\`formula\n${body.trim()}\n\`\`\`\n`,
   )
-  // 2. Pandoc display \[...\] con \<cmd> dentro.
-  out = out.replace(
-    /\\\[([^\n]*?\\[a-zA-Z]+[^\n]*?)\\\]/g,
-    (_, body: string) => `${BLOCK}${body}${BLOCK}`,
-  )
-  // 3. Brackets planos [...] con \<cmd> dentro.
-  out = out.replace(
-    /\[([^\]\n]*\\[a-zA-Z]+[^\]\n]*)\]/g,
-    (_, body: string) => `${BLOCK}${body}${BLOCK}`,
-  )
-  return out
 }
 
 export function Markdown({ source, currentCategoriaFolder, moduloId }: Props) {
   const [zoom, setZoom] = useState<{ src: string; alt: string } | null>(null)
 
-  const processed = useMemo(() => (source ? preprocessLatex(source) : ''), [source])
+  const processed = useMemo(() => (source ? preprocessFormulas(source) : ''), [source])
   const keyByLine = useMemo(() => (processed ? buildKeyByLine(processed) : new Map<number, string>()), [processed])
 
   if (!source) {
@@ -85,11 +64,8 @@ export function Markdown({ source, currentCategoriaFolder, moduloId }: Props) {
   return (
     <div className={styles.root}>
       <ReactMarkdown
-        remarkPlugins={[remarkGfm, [remarkMath, { singleDollarTextMath: false }]]}
-        rehypePlugins={[
-          [rehypeHighlight, { detect: true, ignoreMissing: true }],
-          [rehypeKatex, { throwOnError: false, strict: false }],
-        ]}
+        remarkPlugins={[remarkGfm]}
+        rehypePlugins={[[rehypeHighlight, { detect: true, ignoreMissing: true }]]}
         components={{
           a({ href, children, ...rest }) {
             if (href && isInternalContentLink(href)) {
@@ -128,6 +104,9 @@ export function Markdown({ source, currentCategoriaFolder, moduloId }: Props) {
             const lang = /language-(\w+)/.exec(codeClassName)?.[1]
             if (lang === 'mermaid') {
               return <MermaidBlock source={String(inner).trim()} />
+            }
+            if (lang === 'formula') {
+              return <div className={styles.formula}>{String(inner).trim()}</div>
             }
             return <Code block>{inner}</Code>
           },
