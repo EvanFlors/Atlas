@@ -1,0 +1,17 @@
+{
+  "name": "atlas-chat-worker",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "wrangler dev --port 8787",
+    "deploy": "wrangler deploy",
+    "vectorize:create": "wrangler vectorize create atlas-chunks --dimensions=384 --metric=cosine",
+    "vectorize:upload": "node scripts/upload-to-vectorize.mjs",
+    "secret:minimax": "wrangler secret put MINIMAX_API_KEY"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20241218.0",
+    "typescript": "^5.7.2",
+    "wrangler": "^3.95.0"
+  }
+}

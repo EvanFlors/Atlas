@@ -3,6 +3,7 @@ import { Outlet, useLocation } from 'react-router-dom'
 import { Header } from './Header'
 import { Sidebar } from './Sidebar'
 import { Pomodoro } from './Pomodoro'
+import { Chatbot } from './Chatbot'
 import styles from './Shell.module.css'
 
 export function Shell() {
@@ -35,6 +36,7 @@ export function Shell() {
         <div className={styles.backdrop} onClick={() => setDrawerOpen(false)} aria-hidden="true" />
       )}
       <Pomodoro />
+      <Chatbot />
     </div>
   )
 }

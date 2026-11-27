@@ -1,0 +1,3 @@
+# Rename to .dev.vars (gitignored) with your actual MiniMax key.
+# wrangler dev loads this automatically; wrangler deploy ignores it.
+MINIMAX_API_KEY=sk-...
