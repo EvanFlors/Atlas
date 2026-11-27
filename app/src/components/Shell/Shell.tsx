@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Outlet, useLocation } from 'react-router-dom'
 import { Header } from './Header'
 import { Sidebar } from './Sidebar'
+import { Pomodoro } from './Pomodoro'
 import styles from './Shell.module.css'
 
 export function Shell() {
@@ -33,6 +34,7 @@ export function Shell() {
       {drawerOpen && (
         <div className={styles.backdrop} onClick={() => setDrawerOpen(false)} aria-hidden="true" />
       )}
+      <Pomodoro />
     </div>
   )
 }
