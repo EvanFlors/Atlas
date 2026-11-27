@@ -12,7 +12,7 @@
     "EMBED_DIM": "384",
     "MIN_SIM": "0.75",
     "DAILY_CAP": "500",
-    "ALLOWED_ORIGINS": "https://efloresp06.github.io,http://localhost:5173,http://localhost:5174,http://localhost:5175,http://localhost:5176,http://localhost:5177,http://localhost:5178"
+    "ALLOWED_ORIGINS": "https://evanflors.github.io,http://localhost:5173,http://localhost:5174,http://localhost:5175,http://localhost:5176,http://localhost:5177,http://localhost:5178"
   },
 
   // Vectorize. Create first: npm run vectorize:create
